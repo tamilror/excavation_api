@@ -1,0 +1,67 @@
+<!-- app/views/tickets/show.html.erb -->
+
+<h1>Ticket Details</h1>
+
+<table>
+  <tr>
+    <th>Request Number:</th>
+    <td><%= @ticket.request_number %></td>
+  </tr>
+  <tr>
+    <th>Sequence Number:</th>
+    <td><%= @ticket.sequence_number %></td>
+  </tr>
+  <tr>
+    <th>Request Type:</th>
+    <td><%= @ticket.request_type %></td>
+  </tr>
+  <tr>
+    <th>Request Action:</th>
+    <td><%= @ticket.request_action %></td>
+  </tr>
+  <tr>
+    <th>Response Due Date Time:</th>
+    <td><%= @ticket.response_due_datetime %></td>
+  </tr>
+  <tr>
+    <th>Primary Service Area Code:</th>
+    <td><%= @ticket.primary_service_area_code %></td>
+  </tr>
+  <tr>
+    <th>Additional Service Area Codes:</th>
+    <td><%= @ticket.additional_service_area_codes %></td>
+  </tr>
+  <tr>
+    <th>Digsite Info - Well Known Text:</th>
+    <td><%= @ticket.digsite_info.well_known_text %></td>
+  </tr>
+  <tr>
+    <th>Excavator - Company Name:</th>
+    <td><%= @ticket.excavator.company_name %></td>
+  </tr>
+  <tr>
+    <th>Excavator - Address:</th>
+    <td><%= @ticket.excavator.address %></td>
+  </tr>
+  <tr>
+    <th>Excavator - Crew On Site:</th>
+    <td><%= @ticket.excavator.crew_on_site ? 'Yes' : 'No' %></td>
+  </tr>
+</table>
+
+<div id="map" style="height: 400px;"></div>
+
+<script>
+  var wellKnownText = '<%= j @ticket.digsite_info.well_known_text %>';
+  var coordinates = wellKnownText.match(/\((.*?)\)/)[1].split(' ');
+
+  var map = L.map('map').setView([parseFloat(coordinates[1]), parseFloat(coordinates[0])], 12);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+
+  L.marker([parseFloat(coordinates[1]), parseFloat(coordinates[0])]).addTo(map)
+    .bindPopup('Dig Site Location');
+</script>
+

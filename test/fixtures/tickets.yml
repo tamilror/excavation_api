@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  request_number: MyString
+  sequence_number: MyString
+  request_type: MyString
+  request_action: MyString
+  response_due_datetime: 2023-11-02 10:00:41
+  primary_service_area_code: MyString
+  additional_service_area_codes: MyString
+  well_known_text: MyText
+
+two:
+  request_number: MyString
+  sequence_number: MyString
+  request_type: MyString
+  request_action: MyString
+  response_due_datetime: 2023-11-02 10:00:41
+  primary_service_area_code: MyString
+  additional_service_area_codes: MyString
+  well_known_text: MyText
