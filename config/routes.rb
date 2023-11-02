@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   get 'tickets/show'
   get 'api/create'
   post '/api/create', to: 'api#create'
-  
   resources :tickets, only: [:index, :show]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
