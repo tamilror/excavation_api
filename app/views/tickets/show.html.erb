@@ -1,5 +1,3 @@
-<!-- app/views/tickets/show.html.erb -->
-
 <h1>Ticket Details</h1>
 
 <table>
@@ -33,7 +31,7 @@
   </tr>
   <tr>
     <th>Digsite Info - Well Known Text:</th>
-    <td><%= @ticket.digsite_info.well_known_text %></td>
+    <td><%= @ticket.well_known_text %></td>
   </tr>
   <tr>
     <th>Excavator - Company Name:</th>
@@ -49,19 +47,29 @@
   </tr>
 </table>
 
-<div id="map" style="height: 400px;"></div>
+<div id="osm-map"></div>
 
 <script>
-  var wellKnownText = '<%= j @ticket.digsite_info.well_known_text %>';
-  var coordinates = wellKnownText.match(/\((.*?)\)/)[1].split(' ');
+// Where you want to render the map.
+var element = document.getElementById('osm-map');
 
-  var map = L.map('map').setView([parseFloat(coordinates[1]), parseFloat(coordinates[0])], 12);
+// Height has to be set. You can do this in CSS too.
+element.style = 'height:300px;';
 
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-  }).addTo(map);
+// Create Leaflet map on map element.
+var map = L.map(element);
 
-  L.marker([parseFloat(coordinates[1]), parseFloat(coordinates[0])]).addTo(map)
-    .bindPopup('Dig Site Location');
+// Add OSM tile layer to the Leaflet map.
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+// Target's GPS coordinates.
+var target = L.latLng('47.50737', '19.04611');
+
+// Set map's center to target with zoom 14.
+map.setView(target, 14);
+
+// Place a marker on the same location.
+L.marker(target).addTo(map);
 </script>
-

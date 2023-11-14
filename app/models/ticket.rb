@@ -1,3 +1,3 @@
 class Ticket < ApplicationRecord
-   has_one :excavator
+    has_one :excavator
 end

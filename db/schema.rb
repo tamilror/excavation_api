@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_02_043047) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_11_155954) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,6 +20,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_02_043047) do
     t.boolean "crew_on_site"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "ticket_id"
   end
 
   create_table "tickets", force: :cascade do |t|
@@ -27,6 +28,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_02_043047) do
     t.string "sequence_number"
     t.string "request_type"
     t.string "request_action"
+    t.datetime "date_time"
     t.datetime "response_due_datetime"
     t.string "primary_service_area_code"
     t.string "additional_service_area_codes"
