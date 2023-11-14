@@ -2,7 +2,7 @@ class ApiController < ApplicationController
   def create
     file = File.read('sample.json')
     data = JSON.parse(file)
-    debugger
+  
     ticket_attributes = ticket_params(data['Ticket']).merge(ticket_params(data['DateTimes'])).merge(ticket_params(data["ExcavationInfo"]["DigsiteInfo"]["WellKnownText"]))
     ticket_attributes[:primary_service_area_code] = data.dig('ServiceArea', 'primary_service_area_code', 'SACode')
     ticket_attributes[:additional_service_area_codes] = data.dig('ServiceArea', 'additional_service_area_codes', 'SACode') || []
